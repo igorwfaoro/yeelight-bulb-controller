@@ -30,7 +30,7 @@ def compute_average_image_color():
     img = getDisplaysAsImages()[CONFIGS['watch_monitor']]
 
     width, height = 150, 150
-    img = ImageEnhance.Color(img).enhance(5)
+    img = ImageEnhance.Color(img).enhance(1)
     img = img.resize((width, height), resample=0)
     width, height = img.size
 
@@ -165,6 +165,7 @@ def run():
 
     bulb = create_bulb()
     bulb.set_brightness(CONFIGS['watch_brightness'])
+    bulb.duration = 2000
 
     while(True):
         color = compute_average_image_color()
@@ -172,7 +173,7 @@ def run():
         try:
             bulb.set_rgb(color[0], color[1], color[2])
             print('Light Bulb rgb%s' % str(color))
-            time_sleep(2)
+            time_sleep(1)
         except:
             bulb = create_bulb()
             print('Create new Bulb instance')
