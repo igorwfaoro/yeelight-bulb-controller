@@ -165,7 +165,7 @@ def run():
 
     bulb = create_bulb()
     bulb.set_brightness(CONFIGS['watch_brightness'])
-    bulb.duration = 2000
+    bulb.duration = 1800
 
     while(True):
         color = compute_average_image_color()
@@ -173,7 +173,7 @@ def run():
         try:
             bulb.set_rgb(color[0], color[1], color[2])
             print('Light Bulb rgb%s' % str(color))
-            time_sleep(1)
+            time_sleep(2)
         except:
             bulb = create_bulb()
             print('Create new Bulb instance')
