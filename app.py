@@ -1,4 +1,4 @@
-from yeelight import Bulb
+from yeelight import Bulb, SceneClass
 import click
 from json import loads as json_loads, dumps as json_dumps
 from PIL import ImageEnhance
@@ -20,6 +20,7 @@ def set_configs(config):
 
 
 CONFIGS = get_configs()
+
 
 def create_bulb():
     return Bulb(CONFIGS['bulb_ip'])
@@ -101,27 +102,22 @@ def toggle():
 
 
 @main.command()
-def default():
-    bulb = create_bulb()
-    bulb.set_brightness(100)
-    bulb.set_color_temp(5862)
-    print('Light Bulb default')
+@click.argument('scene_name', required=False)
+def scene(scene_name):
+    if scene_name:
+        bulb = create_bulb()
+        scene = CONFIGS['scenes'][scene_name]
 
+        bulb.set_brightness(scene['brightness'])
 
-@main.command()
-def soft():
-    bulb = create_bulb()
-    bulb.set_brightness(1)
-    bulb.set_rgb(0, 234, 255)
-    print('Light Bulb soft')
-
-
-@main.command()
-def hell():
-    bulb = create_bulb()
-    bulb.set_brightness(1)
-    bulb.set_rgb(255, 0, 0)
-    print('Light Bulb hell')
+        if scene['rgb']:
+            r, g, b = scene['rgb']
+            bulb.set_rgb(r, g, b)
+        elif scene['color_temp']:
+            bulb.set_color_temp(scene['color_temp'])
+    else:
+        for s in CONFIGS['scenes']:
+            print("- %s" % s['name'])
 
 
 #################### watch ####################
@@ -176,6 +172,7 @@ def run():
             time_sleep(2)
         except:
             bulb = create_bulb()
+            bulb.duration = 1800
             print('Create new Bulb instance')
 
 
