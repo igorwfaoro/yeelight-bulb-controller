@@ -8,6 +8,10 @@ Control your Yeelight Bulb
 - I tested it with [Yeelight LED Light Bulb (Color)](https://www.mi.com/us/yeelight-led-light-bulb), but it should work on other models
 
 ## How to use
+
+### **Install the requirements**
+```pip install -r requirements.txt```
+
 ### **Configure your device in ```configs.json```:**
 ```json
 {
