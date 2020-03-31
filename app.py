@@ -1,4 +1,4 @@
-from yeelight import Bulb, SceneClass
+from yeelight import Bulb
 import click
 from json import loads as json_loads, dumps as json_dumps
 from PIL import ImageEnhance
@@ -15,7 +15,7 @@ def get_configs():
 
 def set_configs(config):
     config_file = open('configs.json', 'w')
-    config_file.write(json_dumps(config))
+    config_file.write(json_dumps(config, sort_keys=True, indent=4))
     config_file.close()
 
 
@@ -102,22 +102,18 @@ def toggle():
 
 
 @main.command()
-@click.argument('scene_name', required=False)
+@click.argument('scene_name', type=click.Choice(CONFIGS['scenes'].keys()))
 def scene(scene_name):
-    if scene_name:
-        bulb = create_bulb()
-        scene = CONFIGS['scenes'][scene_name]
+    bulb = create_bulb()
+    scene = CONFIGS['scenes'][scene_name]
 
-        bulb.set_brightness(scene['brightness'])
+    bulb.set_brightness(scene['brightness'])
 
-        if scene['rgb']:
-            r, g, b = scene['rgb']
-            bulb.set_rgb(r, g, b)
-        elif scene['color_temp']:
-            bulb.set_color_temp(scene['color_temp'])
-    else:
-        for s in CONFIGS['scenes']:
-            print("- %s" % s['name'])
+    if scene['rgb']:
+        r, g, b = scene['rgb']
+        bulb.set_rgb(r, g, b)
+    elif scene['color_temp']:
+        bulb.set_color_temp(scene['color_temp'])
 
 
 #################### watch ####################

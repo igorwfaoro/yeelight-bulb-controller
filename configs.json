@@ -1,11 +1,17 @@
 {
     "bulb_ip": "192.168.0.44",
-    "watch_monitor": 1,
-    "watch_brightness": 1,
     "scenes": {
         "default": {
             "brightness": 100,
             "color_temp": 5862
+        },
+        "hell": {
+            "brightness": 1,
+            "rgb": [
+                255,
+                0,
+                1
+            ]
         },
         "softblue": {
             "brightness": 1,
@@ -22,14 +28,8 @@
                 43,
                 226
             ]
-        },
-        "hell": {
-            "brightness": 1,
-            "rgb": [
-                255,
-                0,
-                1
-            ]
         }
-    }
+    },
+    "watch_brightness": 1,
+    "watch_monitor": 1
 }
