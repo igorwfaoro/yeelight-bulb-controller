@@ -1,5 +1,7 @@
 {
     "bulb_ip": "192.168.0.44",
+    "watch_brightness": 1,
+    "watch_monitor": 1,
     "scenes": {
         "default": {
             "brightness": 100,
@@ -29,7 +31,5 @@
                 226
             ]
         }
-    },
-    "watch_brightness": 1,
-    "watch_monitor": 1
+    }
 }

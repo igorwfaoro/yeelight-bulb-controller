@@ -15,7 +15,7 @@ def get_configs():
 
 def set_configs(config):
     config_file = open('configs.json', 'w')
-    config_file.write(json_dumps(config, sort_keys=True, indent=4))
+    config_file.write(json_dumps(config, indent=4))
     config_file.close()
 
 
