@@ -1,0 +1,17 @@
+{
+  "name": "tray",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node app",
+    "pm2-start": "pm2 start app.js --name=yeelight-bulb-tray",
+    "pm2-stop": "pm2 stop yeelight-bulb-tray",
+    "pm2-delete": "pm2 delete yeelight-bulb-tray"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "systray": "^1.0.5"
+  }
+}

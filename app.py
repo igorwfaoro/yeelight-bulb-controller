@@ -109,10 +109,10 @@ def scene(scene_name):
 
     bulb.set_brightness(scene['brightness'])
 
-    if scene['rgb']:
+    if 'rgb' in scene:
         r, g, b = scene['rgb']
         bulb.set_rgb(r, g, b)
-    elif scene['color_temp']:
+    elif 'color_temp' in scene:
         bulb.set_color_temp(scene['color_temp'])
 
 
