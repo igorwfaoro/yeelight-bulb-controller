@@ -1,2 +1,3 @@
 .vscode/
 node-tray/node_modules/
+__pycache__/
