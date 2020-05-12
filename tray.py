@@ -5,21 +5,9 @@ import app
 
 
 def create_image():
-    width = 64
-    height = 64
 
-    color1 = '#0000ff'
-    color2 = '#fc0000'
-
-    # Generate an image and draw a pattern
-    image = Image.new('RGB', (width, height), color1)
-    dc = ImageDraw.Draw(image)
-    dc.rectangle(
-        (width // 2, 0, width, height // 2),
-        fill=color2)
-    dc.rectangle(
-        (0, height // 2, width // 2, height),
-        fill=color2)
+    image = Image.open('./icon.png')
+    image.thumbnail([64, 64], Image.ANTIALIAS)
 
     return image
 
