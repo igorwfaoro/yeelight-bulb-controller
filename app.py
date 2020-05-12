@@ -1,5 +1,4 @@
 from yeelight import Bulb
-import click
 from json import loads as json_loads, dumps as json_dumps
 from PIL import ImageEnhance
 from time import sleep as time_sleep
@@ -53,14 +52,6 @@ def compute_average_image_color():
 
 ############################ CLI #################
 
-
-@click.group()
-def main():
-    pass
-
-
-@main.command()
-@click.argument('ip', required=False)
 def ip(ip):
     configs = get_configs()
 
@@ -72,7 +63,6 @@ def ip(ip):
         print(configs['bulb_ip'])
 
 
-@main.command()
 def configs():
     configs = get_configs()
 
@@ -80,29 +70,24 @@ def configs():
         print("%s: %s" % (key, value))
 
 
-@main.command()
 def on():
     bulb = create_bulb()
     bulb.turn_on()
     print('Light Bulb on')
 
 
-@main.command()
 def off():
     bulb = create_bulb()
     bulb.turn_off()
     print('Light Bulb off')
 
 
-@main.command()
 def toggle():
     bulb = create_bulb()
     bulb.toggle()
     print('Light Bulb toggled')
 
 
-@main.command()
-@click.argument('scene_name', type=click.Choice(CONFIGS['scenes'].keys()))
 def scene(scene_name):
     bulb = create_bulb()
     scene = CONFIGS['scenes'][scene_name]
@@ -115,18 +100,12 @@ def scene(scene_name):
     elif 'color_temp' in scene:
         bulb.set_color_temp(scene['color_temp'])
 
+    print('Light Bulb scene %s' % scene_name)
+
 
 #################### watch ####################
 
-
-@main.group()
-def watch():
-    pass
-
-
-@watch.command()
-@click.argument('brightness', required=False)
-def brightness(brightness):
+def watch_brightness(brightness):
     configs = get_configs()
 
     if(brightness):
@@ -137,9 +116,7 @@ def brightness(brightness):
         print(configs['watch_brightness'])
 
 
-@watch.command()
-@click.argument('monitor', required=False)
-def monitor(monitor):
+def watch_monitor(monitor):
     configs = get_configs()
 
     if(monitor):
@@ -150,8 +127,7 @@ def monitor(monitor):
         print(configs['watch_monitor'])
 
 
-@watch.command()
-def run():
+def watch_run():
 
     print('Watching monitor %s' % CONFIGS['watch_monitor'])
 
@@ -170,10 +146,3 @@ def run():
             bulb = create_bulb()
             bulb.duration = 1800
             print('Create new Bulb instance')
-
-
-######################################
-
-
-if __name__ == "__main__":
-    main()
